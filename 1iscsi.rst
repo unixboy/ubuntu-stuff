@@ -1,10 +1,7 @@
-Using iSCSI On Ubuntu 10.04 (Initiator And Target)
-Version 1.0 
-Author: Falko Timme 
- Follow me on Twitter
-This guide explains how you can set up an iSCSI target and an iSCSI initiator (client), both running Ubuntu 10.04. The iSCSI protocol is a storage area network (SAN) protocol which allows iSCSI initiators to use storage devices on the (remote) iSCSI target using normal ethernet cabling. To the iSCSI initiator, the remote storage looks like a normal, locally-attached hard drive.
-I do not issue any guarantee that this will work for you!
+** Using iSCSI On Ubuntu 10.04 (Initiator And Target)
  
+This guide explains how you can set up an iSCSI target and an iSCSI initiator (client), both running Ubuntu 10.04. The iSCSI protocol is a storage area network (SAN) protocol which allows iSCSI initiators to use storage devices on the (remote) iSCSI target using normal ethernet cabling. To the iSCSI initiator, the remote storage looks like a normal, locally-attached hard drive.
+
 1 Preliminary Note
 
 I'm using two Ubuntu 10.04 servers here:
@@ -337,8 +334,10 @@ none                   18G  839M   16G   5% /var/lib/ureadahead/debugfs
 /dev/sda1             228M   17M  199M   8% /boot
 /dev/sdb1              20G  172M   19G   1% /storage
 root@server1:~#
- How to discover, login, and logout iSCSI targets
-ORACLE SOLUTIONS
+
+
+
+** How to discover, login, and logout iSCSI targets
 
 Applies to:
 ----------------------------------------------------------------------------------------------------------------------
