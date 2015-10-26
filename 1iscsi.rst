@@ -337,4 +337,67 @@ none                   18G  839M   16G   5% /var/lib/ureadahead/debugfs
 /dev/sda1             228M   17M  199M   8% /boot
 /dev/sdb1              20G  172M   19G   1% /storage
 root@server1:~#
- 
+ How to discover, login, and logout iSCSI targets
+ORACLE SOLUTIONS
+
+Applies to:
+----------------------------------------------------------------------------------------------------------------------
+Operating Systems - RHEL 5.x, RHEL 6.x, OL 5.x, OL 6.x, Oracle VM 2.x
+Platform - Applies to all Dell PowerEdge Servers
+
+Goal:
+----------------------------------------------------------------------------------------------------------------------
+
+To discover iSCSI targets, login targets, and logout targets from your EqualLogic iSCSI storage array.
+
+Solution:
+---------------------------------------------------------------------------------------------------------------------
+
+Once the process of installing the iSCSI initiator is completed as seen in the wiki article, http://en.community.dell.com/dell-groups/enterprise_solutions/w/oracle_solutions/3-2-1-1-1-how-do-i-install-and-start-iscsi-initiator-utils.aspx, the next step is to discover your iSCSI targets.
+
+Discovering iSCSI Targets:
+
+Once you have the iSCSI service running you will use the 'iscsiadm' userspace utility to discover, login and logout iSCSI targets.
+
+To get a list of available targets the following command can be used:
+
+#iscsiadm -m discovery -t st -p <Group IP address>:3260
+
+NOTE	The group IP address is the IP address of the EqualLogic storage group. 
+Example:
+
+# iscsiadm -m discovery -t st -p 172.23.10.240:3260
+
+172.23.10.240:3260,1 iqn.2001-05.com.equallogic:0-8a0906-83bcb3401-16e0002fd0a46f3d-rhel5-test
+
+The example shows that the 'rhel5-test' volume has been found.
+
+Logging in iSCSI Targets:
+
+Once you have discovered your iSCSI targets, you can log in the following target in one of two ways.
+
+Issuing the following command will login all iSCSI targets found. The command to login all iSCSI targets at once is the following:
+
+#iscsiadm -m node -l
+
+If you prefer to login an individual iSCSI target the following command can be issued:
+
+#iscsiadm -m node -T <Complete Target Name> -l -p <Group IP>:3260
+
+Example:
+
+#iscsiadm -m node -l -T iqn.2001-05.com.equallogic:83bcb3401-16e0002fd0a46f3d-rhel5-test -p 172.23.10.240:3260
+
+Logging out iSCSI Targets:
+
+Logging out iSCSI targets also can be accomplished in one of two ways. The process of logging out all iSCSI targets found, can be done with the following command:
+
+#iscsiadm -m node -u
+
+The process of logging out individual iSCSI target uses the following command:
+
+#iscsiadm -m node -u -T <Complete Target Name>-p <Group IP address>:3260
+
+Example:
+
+#iscsiadm -m node -u -T iqn.2001-05.com.equallogic:83bcb3401-16e0002fd0a46f3d-rhel5-test -p 172.23.10.240:3260
