@@ -1,13 +1,13 @@
 Here's a direct read.
 
-$ sudo hdparm -t /dev/sda2
+   $ sudo hdparm -t /dev/sda2
 
 /dev/sda2:
  Timing buffered disk reads: 302 MB in  3.00 seconds = 100.58 MB/sec
 
 And here's a cached read.
 
-$ sudo hdparm -T /dev/sda2
+   $ sudo hdparm -T /dev/sda2
 
 /dev/sda2:
  Timing cached reads:   4636 MB in  2.00 seconds = 2318.89 MB/sec
