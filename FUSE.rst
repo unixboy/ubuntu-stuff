@@ -24,3 +24,17 @@ lsof "${x[@]}" -f -- /tmp/report.csv
 Or to be sure to use stat() (test -e could be implemented a different way):
 
 x=(); for a in $(mount | cut -d' ' -f3); do stat --printf= "$a" 2>/dev/null || x+=("-e$a"); done
+
+
+
+Linux To determine if the number of open files is growing over a period of time, issue lsof to report the open files against a PID on a periodic basis. For example: 
+
+lsof -p [PID] -r [interval in seconds, 1800 for 30 minutes] > lsof.out 
+
+The output will provide you with all of the open files for the specified PID. You will be able to determine which files are opened and which files are growing over time. 
+
+
+Alternately you can list the contents of the file descriptors as a list of symbolic links in the following directory, where you replace PID with the process ID. This is especially useful if you don't have access to the lsof command: 
+
+ls -al /proc/PID/fd 
+
